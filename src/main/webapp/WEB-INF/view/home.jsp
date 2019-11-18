@@ -31,41 +31,41 @@
 
 	<div id="wrapper">
 
-		<div id="head">
-			<h2>Stock Scraper</h2>
+		<div id="container">
+
+			<div id="head">
+				<h2>Stock Scraper</h2>
+			</div>
+
+			<div id="content">
+
+				<div>
+					<input type="button" value="Scrape Data"
+						onclick="window.location.href='scrapeData'; return false;" />
+
+					<table>
+						<tr>
+							<th>Symbol</th>
+							<th>Latest Price</th>
+							<th>Change Percentage</th>
+							<th>Scrape Time</th>
+						</tr>
+
+						<c:forEach var="tempStock" items="${stocks}">
+
+							<tr>
+								<td>${tempStock.symbol}</td>
+								<td>${tempStock.latestPrice}</td>
+								<td>${tempStock.change}</td>
+								<td>${tempStock.scrape_time}</td>
+							</tr>
+
+						</c:forEach>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
-
-	<div id="container">
-
-		<div id="content">
-
-			<input type="button" value="Scrape Data"
-				onclick="window.location.href='scrapeData'; return false;" />
-
-			<table>
-				<tr>
-					<th>Symbol</th>
-					<th>Latest Price</th>
-					<th>Change Percentage</th>
-					<th>Scrape Time</th>
-				</tr>
-
-				<c:forEach var="tempStock" items="${stocks}">
-
-					<tr>
-						<td>${tempStock.symbol}</td>
-						<td>${tempStock.latestPrice}</td>
-						<td>${tempStock.change}</td>
-						<td>${tempStock.scrape_time}</td>
-					</tr>
-
-				</c:forEach>
-			</table>
-
-		</div>
-	</div>
-
 </body>
 
 </html>

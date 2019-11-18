@@ -22,9 +22,7 @@ public class ScrapeStockSite {
 
 	public static void scrapeSite() throws MalformedURLException {
 
-		ChromeOptions chromeOptions = new ChromeOptions();
-		URL url = new URL("http://192.168.99.101:4444/wd/hub");
-		RemoteWebDriver driver = new RemoteWebDriver(url, chromeOptions);
+		RemoteWebDriver driver = getDriver();
 
 		driver.get("https://finance.yahoo.com/");
 
@@ -80,19 +78,35 @@ public class ScrapeStockSite {
 			pricesText.add(prices.get(i).getText());
 			changesText.add(changes.get(i).getText());
 		}
+		
+		saveScrape(symbolsText, pricesText, changesText);
+
+	}
+
+	private static RemoteWebDriver getDriver() throws MalformedURLException {
+
+		ChromeOptions chromeOptions = new ChromeOptions();
+		URL url = new URL("http://192.168.99.101:4444/wd/hub");
+		RemoteWebDriver driver = new RemoteWebDriver(url, chromeOptions);
+
+		return driver;
+
+	}
+
+	private static void saveScrape(ArrayList<String> symbols, ArrayList<String> prices, ArrayList<String> changes) {
 
 		LocalDateTime scrapeTime = LocalDateTime.now();
-		
+
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Stock.class)
 				.buildSessionFactory();
 
 		Session scrapeSession = factory.getCurrentSession();
 		scrapeSession.beginTransaction();
-		
+
 		try {
 			for (int i = 0; i < symbols.size(); i++) {
 
-				Stock stock = new Stock(symbolsText.get(i), pricesText.get(i), changesText.get(i), scrapeTime);
+				Stock stock = new Stock(symbols.get(i), prices.get(i), changes.get(i), scrapeTime);
 
 				scrapeSession.save(stock);
 				System.out.println(stock.toString());
@@ -104,7 +118,6 @@ public class ScrapeStockSite {
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
-			driver.manage().deleteAllCookies();
 			scrapeSession.close();
 		}
 	}
