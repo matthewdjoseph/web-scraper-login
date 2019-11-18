@@ -2,8 +2,8 @@ package com.webscraper.app;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -95,7 +95,7 @@ public class ScrapeStockSite {
 
 	private static void saveScrape(ArrayList<String> symbols, ArrayList<String> prices, ArrayList<String> changes) {
 
-		LocalDateTime scrapeTime = LocalDateTime.now();
+		Date scrapeTime = new Date();
 
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Stock.class)
 				.buildSessionFactory();

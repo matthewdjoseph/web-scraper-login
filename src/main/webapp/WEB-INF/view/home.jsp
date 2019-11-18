@@ -1,48 +1,28 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <html>
 <head>
 <title>Web Scraper</title>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<!-- Reference Bootstrap files -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-
+<link type="text/css" rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/style.css" />
 <body>
-	<h2>Welcome to Web Scraper</h2>
-
-
-	<form:form action="${pageContext.request.contextPath}/logout"
-		method="POST">
-
-		<input type="submit" value="Logout" />
-	</form:form>
-
+	<h2>Yahoo! Finance Scraper</h2>
+	<hr />
 	<div id="wrapper">
-
+		<form:form action="${pageContext.request.contextPath}/logout"
+			method="POST">
+			<input type="button" value="Scrape Data"
+				onclick="window.location.href='scrapeData'; return false;" />
+			<input type="submit" value="Logout" />
+		</form:form>
 		<div id="container">
-
-			<div id="head">
-				<h2>Stock Scraper</h2>
-			</div>
 
 			<div id="content">
 
 				<div>
-					<input type="button" value="Scrape Data"
-						onclick="window.location.href='scrapeData'; return false;" />
-
+					<br />
 					<table>
 						<tr>
 							<th>Symbol</th>
@@ -57,7 +37,8 @@
 								<td>${tempStock.symbol}</td>
 								<td>${tempStock.latestPrice}</td>
 								<td>${tempStock.change}</td>
-								<td>${tempStock.scrape_time}</td>
+								<td><fmt:formatDate value="${tempStock.scrape_time}"
+										pattern="yyyy-MM-dd HH:mm:ss" /></td>
 							</tr>
 
 						</c:forEach>
@@ -65,6 +46,7 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
 </body>
 

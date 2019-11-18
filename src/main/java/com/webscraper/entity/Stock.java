@@ -1,6 +1,6 @@
 package com.webscraper.entity;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,13 +27,13 @@ public class Stock {
 	private String change;
 	
 	@Column(name = "scrape_time")
-	private LocalDateTime scrape_time;
+	private Date scrape_time;
 
-	public LocalDateTime getScrape_time() {
+	public Date getScrape_time() {
 		return scrape_time;
 	}
 
-	public void setScrape_time(LocalDateTime scrape_time) {
+	public void setScrape_time(Date scrape_time) {
 		this.scrape_time = scrape_time;
 	}
 
@@ -41,7 +41,7 @@ public class Stock {
 
 	}
 
-	public Stock(String symbol, String latestPrice, String change, LocalDateTime scrapeTime) {
+	public Stock(String symbol, String latestPrice, String change, Date scrapeTime) {
 		this.symbol = symbol;
 		this.latestPrice = latestPrice;
 		this.change = change;
