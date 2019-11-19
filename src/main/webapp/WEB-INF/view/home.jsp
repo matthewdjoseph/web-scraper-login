@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <html>
 <head>
@@ -15,6 +16,8 @@
 			method="POST">
 			<input type="button" value="Scrape Data"
 				onclick="window.location.href='scrapeData'; return false;" />
+			<input type="button" value="About"
+				onclick="window.location.href='about'; return false;" />
 			<input type="submit" value="Logout" />
 		</form:form>
 		<div id="container">
@@ -35,7 +38,8 @@
 
 							<tr>
 								<td>${tempStock.symbol}</td>
-								<td>${tempStock.latestPrice}</td>
+								<td><fmt:setLocale value="en_US" /> <fmt:formatNumber
+										value="${fn:replace(tempStock.latestPrice, ',', '')}" type="currency" /></td>
 								<td>${tempStock.change}</td>
 								<td><fmt:formatDate value="${tempStock.scrape_time}"
 										pattern="yyyy-MM-dd HH:mm:ss" /></td>

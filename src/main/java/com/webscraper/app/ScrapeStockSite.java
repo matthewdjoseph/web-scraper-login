@@ -65,21 +65,7 @@ public class ScrapeStockSite {
 
 		System.out.println("Portfolio successfully accessed! Beginning data scrape...\n");
 
-		ArrayList<String> symbolsText = new ArrayList<String>();
-		ArrayList<String> pricesText = new ArrayList<String>();
-		ArrayList<String> changesText = new ArrayList<String>();
-
-		List<WebElement> symbols = driver.findElementsByCssSelector("td[aria-label='Symbol']");
-		List<WebElement> prices = driver.findElementsByCssSelector("td[aria-label='Last Price']");
-		List<WebElement> changes = driver.findElementsByCssSelector("td[aria-label='Chg %']");
-
-		for (int i = 0; i < symbols.size(); i++) {
-			symbolsText.add(symbols.get(i).getText());
-			pricesText.add(prices.get(i).getText());
-			changesText.add(changes.get(i).getText());
-		}
-		
-		saveScrape(symbolsText, pricesText, changesText);
+		scrapeData(driver);
 
 	}
 
@@ -120,5 +106,24 @@ public class ScrapeStockSite {
 		} finally {
 			scrapeSession.close();
 		}
+	}
+	
+	private static void scrapeData(RemoteWebDriver driver) {
+		
+		ArrayList<String> symbolsText = new ArrayList<String>();
+		ArrayList<String> pricesText = new ArrayList<String>();
+		ArrayList<String> changesText = new ArrayList<String>();
+
+		List<WebElement> symbols = driver.findElementsByCssSelector("td[aria-label='Symbol']");
+		List<WebElement> prices = driver.findElementsByCssSelector("td[aria-label='Last Price']");
+		List<WebElement> changes = driver.findElementsByCssSelector("td[aria-label='Chg %']");
+
+		for (int i = 0; i < symbols.size(); i++) {
+			symbolsText.add(symbols.get(i).getText());
+			pricesText.add(prices.get(i).getText());
+			changesText.add(changes.get(i).getText());
+		}
+		
+		saveScrape(symbolsText, pricesText, changesText);
 	}
 }

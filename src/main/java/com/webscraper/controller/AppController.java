@@ -36,5 +36,11 @@ public class AppController {
 
 		return "redirect:/";
 	}
+	
+	@GetMapping("/about")
+	public String showAbout() {
+		
+		return "about";
+	}
 
 }
