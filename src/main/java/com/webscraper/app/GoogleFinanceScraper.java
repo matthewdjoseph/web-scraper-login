@@ -2,13 +2,16 @@ package com.webscraper.app;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.List;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public class GoogleFinanceScraper {
@@ -31,9 +34,19 @@ public class GoogleFinanceScraper {
 		
 		webClient.waitForBackgroundJavaScript(5000);
 		
-		System.out.println("Reached destination...time to scrape!");
+		System.out.println("Reached destination...time to scrape! ");
 		
-		List<HtmlElement> stocks = page1.getByXPath("//dev[class='ML43Jb fw-wli bm7Wje HXsnuf']");
+		Document stockPage = Jsoup.parse(page1.asXml());
+		
+		Elements stocks = stockPage.select("div.ML43Jb CPqeke");
+		
+		for(int i=0; i< stocks.size(); i++) {
+			System.out.println(stocks.get(i).ownText());
+			System.out.println(stocks.get(i).text());
+			System.out.println(stocks.get(i).val());
+		}
+		
+		System.out.println(stocks.text());
 
 		//webClient.close();
 	}
