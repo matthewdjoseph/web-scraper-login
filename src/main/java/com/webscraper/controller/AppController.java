@@ -1,5 +1,6 @@
 package com.webscraper.controller;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
 
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.webscraper.app.GoogleFinanceScraper;
 import com.webscraper.app.ScrapeStockSite;
 import com.webscraper.entity.Stock;
 import com.webscraper.service.StockService;
@@ -34,6 +37,14 @@ public class AppController {
 
 		ScrapeStockSite.scrapeSite();
 
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/scrapeGoogle")
+	public String scrapeGoogle() throws FailingHttpStatusCodeException, MalformedURLException, IOException, InterruptedException {
+		
+		GoogleFinanceScraper.scrapeGoogle();
+		
 		return "redirect:/";
 	}
 	

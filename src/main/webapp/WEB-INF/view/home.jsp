@@ -16,6 +16,8 @@
 			method="POST">
 			<input type="button" value="Scrape Data"
 				onclick="window.location.href='scrapeData'; return false;" />
+			<input type="button" value="Scrape Google"
+				onclick="window.location.href='scrapeGoogle'; return false;" />
 			<input type="button" value="About"
 				onclick="window.location.href='about'; return false;" />
 			<input type="submit" value="Logout" />
