@@ -36,14 +36,12 @@ public class GoogleFinanceScraper {
 		
 		System.out.println("Reached destination...time to scrape! ");
 		
-		Document stockPage = Jsoup.parse(page1.asXml());
+		Document stockPage = Jsoup.parse(page1.asText());
 		
 		Elements stocks = stockPage.select("div.ML43Jb CPqeke");
 		
 		for(int i=0; i< stocks.size(); i++) {
-			System.out.println(stocks.get(i).ownText());
-			System.out.println(stocks.get(i).text());
-			System.out.println(stocks.get(i).val());
+			System.out.println(stocks.get(i).outerHtml().toString());
 		}
 		
 		System.out.println(stocks.text());
