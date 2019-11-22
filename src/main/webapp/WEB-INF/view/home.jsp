@@ -9,14 +9,14 @@
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css" />
 <body>
-	<h2>Yahoo! Finance Scraper</h2>
+	<h2>Finance Data Scraper</h2>
 	<hr />
 	<div id="wrapper">
 		<form:form action="${pageContext.request.contextPath}/logout"
 			method="POST">
-			<input type="button" value="Scrape Data"
+			<input type="button" value="Scrape Yahoo! Finance"
 				onclick="window.location.href='scrapeData'; return false;" />
-			<input type="button" value="Scrape Google"
+			<input type="button" value="Scrape Google Finance"
 				onclick="window.location.href='scrapeGoogle'; return false;" />
 			<input type="button" value="About"
 				onclick="window.location.href='about'; return false;" />

@@ -86,10 +86,10 @@ public class ScrapeStockSite {
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Stock.class)
 				.buildSessionFactory();
 
-		Session scrapeSession = factory.getCurrentSession();
-		scrapeSession.beginTransaction();
-
-		try {
+		try(Session scrapeSession = factory.getCurrentSession();) {
+			
+			scrapeSession.beginTransaction();
+			
 			for (int i = 0; i < symbols.size(); i++) {
 
 				Stock stock = new Stock(symbols.get(i), prices.get(i), changes.get(i), scrapeTime);
@@ -103,8 +103,6 @@ public class ScrapeStockSite {
 
 		} catch (Exception e) {
 			System.out.println(e);
-		} finally {
-			scrapeSession.close();
 		}
 	}
 	
