@@ -2,10 +2,10 @@ package com.webscraper.dao;
 
 import java.util.List;
 
-import com.webscraper.entity.Stock;
+import com.webscraper.entity.YahooStock;
 
 public interface StocksDAO {
 	
-	public List<Stock> getStocks();
+	public List<YahooStock> getStocks();
 
 }

@@ -13,7 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.webscraper.entity.Stock;
+import com.webscraper.entity.YahooStock;
 
 @WebServlet("/TestDbServlet")
 public class ScraperServlet extends HttpServlet {
@@ -27,7 +27,7 @@ public class ScraperServlet extends HttpServlet {
 		try {
 			PrintWriter out = response.getWriter();
 
-			SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Stock.class)
+			SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(YahooStock.class)
 					.buildSessionFactory();
 
 			Session session = factory.getCurrentSession();

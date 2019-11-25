@@ -2,10 +2,10 @@ package com.webscraper.service;
 
 import java.util.List;
 
-import com.webscraper.entity.Stock;
+import com.webscraper.entity.YahooStock;
 
 public interface StockService {
 	
-	public List<Stock> getStocks();
+	public List<YahooStock> getStocks();
 
 }

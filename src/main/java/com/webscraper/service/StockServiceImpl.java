@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webscraper.dao.StocksDAO;
-import com.webscraper.entity.Stock;
+import com.webscraper.entity.YahooStock;
 
 @Service
 public class StockServiceImpl implements StockService {
@@ -18,7 +18,7 @@ public class StockServiceImpl implements StockService {
 
 	@Override
 	@Transactional
-	public List<Stock> getStocks() {
+	public List<YahooStock> getStocks() {
 
 		return stockDAO.getStocks();
 	}

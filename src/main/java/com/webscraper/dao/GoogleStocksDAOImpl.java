@@ -9,7 +9,7 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.webscraper.entity.GoogleStock;
-import com.webscraper.entity.Stock;
+import com.webscraper.entity.YahooStock;
 
 @Repository
 public class GoogleStocksDAOImpl implements GoogleStocksDAO {
@@ -17,7 +17,7 @@ public class GoogleStocksDAOImpl implements GoogleStocksDAO {
 	@Override
 	public List<GoogleStock> getStocks() {
 
-		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Stock.class)
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(YahooStock.class)
 				.buildSessionFactory();
 		
 		Session currentSession = factory.getCurrentSession();

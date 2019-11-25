@@ -7,29 +7,29 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "googlestocks")
-public class GoogleStock extends Stock{
+@Table(name = "stocks")
+public class YahooStock extends Stock{
 
-	@Column(name = "change_points")
+	@Column(name = "change_percentage")
 	private String change;
-	
-	public String getChange() {
-		return change;
-	}
-	
-	public void setChange(String change) {
-		this.change = change;
-	}
 
-	public GoogleStock() {
+	public YahooStock() {
 
 	}
 
-	public GoogleStock(String symbol, String latestPrice, String change, Date scrapeTime) {
+	public YahooStock(String symbol, String latestPrice, String change, Date scrapeTime) {
 		this.symbol = symbol;
 		this.latestPrice = latestPrice;
 		this.change = change;
 		this.scrape_time = scrapeTime;
+	}
+
+	public String getChange() {
+		return change;
+	}
+
+	public void setChange(String change) {
+		this.change = change;
 	}
 
 	@Override

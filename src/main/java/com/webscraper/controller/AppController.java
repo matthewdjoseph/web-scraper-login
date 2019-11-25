@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.webscraper.app.GoogleFinanceScraper;
 import com.webscraper.app.ScrapeStockSite;
-import com.webscraper.entity.Stock;
+import com.webscraper.entity.YahooStock;
 import com.webscraper.service.StockService;
 
 @Controller
@@ -25,7 +25,7 @@ public class AppController {
 
 	@GetMapping("/")
 	public String showHome(Model theModel) {
-		List<Stock> theStocks = stockService.getStocks();
+		List<YahooStock> theStocks = stockService.getStocks();
 
 		theModel.addAttribute("stocks", theStocks);
 
@@ -33,7 +33,7 @@ public class AppController {
 	}
 
 	@RequestMapping("/scrapeData")
-	public String scrapeData(@ModelAttribute("stock") Stock stocks) throws MalformedURLException {
+	public String scrapeData(@ModelAttribute("stock") YahooStock stocks) throws MalformedURLException {
 
 		ScrapeStockSite.scrapeSite();
 

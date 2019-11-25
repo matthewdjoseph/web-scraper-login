@@ -8,23 +8,23 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.webscraper.entity.Stock;
+import com.webscraper.entity.YahooStock;
 
 @Repository
 public class StocksDAOImpl implements StocksDAO {
 	
 	@Override
-	public List<Stock> getStocks() {
+	public List<YahooStock> getStocks() {
 
-		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Stock.class)
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(YahooStock.class)
 				.buildSessionFactory();
 		
 		Session currentSession = factory.getCurrentSession();
 		currentSession.beginTransaction();
 		
-		Query<Stock> theQuery = currentSession.createQuery("from Stock", Stock.class);
+		Query<YahooStock> theQuery = currentSession.createQuery("from YahooStock", YahooStock.class);
 		
-		List<Stock> stocks = theQuery.getResultList();
+		List<YahooStock> stocks = theQuery.getResultList();
 		
 		currentSession.close();
 		

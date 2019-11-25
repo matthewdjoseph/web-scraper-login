@@ -31,8 +31,8 @@ public class GoogleFinanceScraper {
 
 			System.out.println("website reached: " + page1.getTitleText());
 			
-			webClient.waitForBackgroundJavaScript(5000);
-
+			page1.wait(5000);
+			
 			System.out.println("Time to scrape! ");
 
 			Document stockPage = Jsoup.parse(page1.asXml());
