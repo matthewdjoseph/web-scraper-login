@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.webscraper.entity.YahooStock;
 
 @Repository
-public class StocksDAOImpl implements StocksDAO {
+public class YahooStocksDAOImpl implements YahooStocksDAO {
 	
 	@Override
 	public List<YahooStock> getStocks() {
