@@ -16,9 +16,11 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.webscraper.entity.ScrapeTime;
+import com.webscraper.entity.YahooScrapeTime;
 import com.webscraper.entity.YahooStock;
 
-public class ScrapeStockSite {
+public class YahooFinanceScraper {
 
 	public static void scrapeSite() throws MalformedURLException {
 
@@ -86,33 +88,6 @@ public class ScrapeStockSite {
 		return driver;
 
 	}
-
-	private static void saveScrape(ArrayList<String> symbols, ArrayList<String> prices, ArrayList<String> changes) {
-
-		Date scrapeTime = new Date();
-
-		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(YahooStock.class)
-				.buildSessionFactory();
-
-		try(Session scrapeSession = factory.getCurrentSession();) {
-			
-			scrapeSession.beginTransaction();
-			
-			for (int i = 0; i < symbols.size(); i++) {
-
-				YahooStock stock = new YahooStock(symbols.get(i), prices.get(i), changes.get(i), scrapeTime);
-
-				scrapeSession.save(stock);
-				System.out.println(stock.toString());
-
-			}
-
-			scrapeSession.getTransaction().commit();
-
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-	}
 	
 	private static void scrapeData(RemoteWebDriver driver) {
 		
@@ -131,5 +106,36 @@ public class ScrapeStockSite {
 		}
 		
 		saveScrape(symbolsText, pricesText, changesText);
+	}
+	
+	private static void saveScrape(ArrayList<String> symbols, ArrayList<String> prices, ArrayList<String> changes) {
+
+		Date tempScrapeTime = new Date();
+		ScrapeTime scrapeTime = new ScrapeTime(tempScrapeTime);
+
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(YahooStock.class)
+				.addAnnotatedClass(YahooScrapeTime.class)
+				.buildSessionFactory();
+
+		try(Session scrapeSession = factory.getCurrentSession();) {
+			
+			scrapeSession.beginTransaction();
+			
+			for (int i = 0; i < symbols.size(); i++) {
+
+				YahooStock stock = new YahooStock(symbols.get(i), prices.get(i), changes.get(i));
+				
+				stock.setScrapeTime(scrapeTime);
+
+				scrapeSession.save(stock);
+				System.out.println(stock.toString());
+
+			}
+
+			scrapeSession.getTransaction().commit();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.webscraper.app.GoogleFinanceScraper;
-import com.webscraper.app.ScrapeStockSite;
+import com.webscraper.app.YahooFinanceScraper;
 import com.webscraper.entity.YahooStock;
 import com.webscraper.service.StockService;
 
@@ -35,7 +35,7 @@ public class AppController {
 	@RequestMapping("/scrapeData")
 	public String scrapeData(@ModelAttribute("stock") YahooStock stocks) throws MalformedURLException {
 
-		ScrapeStockSite.scrapeSite();
+		YahooFinanceScraper.scrapeSite();
 
 		return "redirect:/";
 	}

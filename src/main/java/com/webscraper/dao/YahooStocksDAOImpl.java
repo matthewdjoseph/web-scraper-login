@@ -8,6 +8,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
+import com.webscraper.entity.YahooScrapeTime;
 import com.webscraper.entity.YahooStock;
 
 @Repository
@@ -17,6 +18,7 @@ public class YahooStocksDAOImpl implements YahooStocksDAO {
 	public List<YahooStock> getStocks() {
 
 		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(YahooStock.class)
+				.addAnnotatedClass(YahooScrapeTime.class)
 				.buildSessionFactory();
 		
 		Session currentSession = factory.getCurrentSession();

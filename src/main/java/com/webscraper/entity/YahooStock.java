@@ -1,7 +1,5 @@
 package com.webscraper.entity;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -17,11 +15,10 @@ public class YahooStock extends Stock{
 
 	}
 
-	public YahooStock(String symbol, String latestPrice, String change, Date scrapeTime) {
+	public YahooStock(String symbol, String latestPrice, String change) {
 		this.symbol = symbol;
 		this.latestPrice = latestPrice;
 		this.change = change;
-		this.scrape_time = scrapeTime;
 	}
 
 	public String getChange() {

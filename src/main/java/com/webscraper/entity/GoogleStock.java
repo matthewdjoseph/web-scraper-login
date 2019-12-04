@@ -29,7 +29,6 @@ public class GoogleStock extends Stock{
 		this.symbol = symbol;
 		this.latestPrice = latestPrice;
 		this.change = change;
-		this.scrape_time = scrapeTime;
 	}
 
 	@Override

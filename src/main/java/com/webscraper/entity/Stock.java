@@ -1,12 +1,15 @@
 package com.webscraper.entity;
 
-import java.util.Date;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+
+import com.webscraper.entity.ScrapeTime;
 
 @MappedSuperclass
 public class Stock {
@@ -21,15 +24,17 @@ public class Stock {
 	@Column(name = "last_price")
 	protected String latestPrice;
 	
-	@Column(name = "scrape_time")
-	protected Date scrape_time;
+	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+			CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinColumn(name="scrape_time_id")
+	private ScrapeTime scrapeTime;
 	
-	public Date getScrape_time() {
-		return scrape_time;
+	public ScrapeTime getScrapeTime() {
+		return scrapeTime;
 	}
 
-	public void setScrape_time(Date scrape_time) {
-		this.scrape_time = scrape_time;
+	public void setScrapeTime(ScrapeTime scrapeTime) {
+		this.scrapeTime = scrapeTime;
 	}
 	
 	public String getSymbol() {
